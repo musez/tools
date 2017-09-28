@@ -4,37 +4,31 @@
     <meta charset="utf-8">
     <title></title>
     <!--引用css-->
-    <link rel="stylesheet" href="bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap2/css/bootstrap.min.css">
 </head>
 <body>
 <!--链接-->
 <a href="http://www.baidu.com/">http://www.baidu.com/</a>
 
 <!-- 询问模态框 -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title"></h4>
-            </div>
-            <div class="modal-body">
-                <p>您访问的链接即将离开“<span id="modalDomainName"></span>”门户网站 是否继续？</p>
-                <input id="modalOuterURL" type="hidden">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">放弃</button>
-                <button type="button" class="btn btn-danger" onclick="toRedirect()">继续访问</button>
-            </div>
-        </div>
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">&nbsp;</h3>
+    </div>
+    <div class="modal-body">
+        <p>您访问的链接即将离开“<span id="modalDomainName"></span>”门户网站 是否继续？</p>
+        <input id="modalOuterURL" type="hidden">
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">放弃</button>
+        <button class="btn btn-danger" onclick="toRedirect()">继续访问</button>
     </div>
 </div>
 
 <!--引用js-->
 <script src="jquery.min.js"></script>
-<script src="bootstrap3/js/bootstrap.min.js"></script>
+<script src="bootstrap2/js/bootstrap.min.js"></script>
 <script>
     $("a").each(function () {
         $(this).click(function (event) {
