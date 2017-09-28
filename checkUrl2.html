@@ -3,36 +3,17 @@
 <head>
     <meta charset="utf-8">
     <title></title>
-    <!--引用css-->
-    <link rel="stylesheet" href="bootstrap2/css/bootstrap.min.css">
 </head>
 <body>
-<!--链接-->
+<h1>原生弹框</h1>
+
 <a href="http://www.baidu.com/">http://www.baidu.com/</a>
 
-<!-- 询问模态框 -->
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">&nbsp;</h3>
-    </div>
-    <div class="modal-body">
-        <p>您访问的链接即将离开“<span id="modalDomainName"></span>”门户网站 是否继续？</p>
-        <input id="modalOuterURL" type="hidden">
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">放弃</button>
-        <button class="btn btn-danger" onclick="toRedirect()">继续访问</button>
-    </div>
-</div>
-
-<!--引用js-->
-<script src="jquery.min.js"></script>
-<script src="bootstrap2/js/bootstrap.min.js"></script>
+<script src="js/jquery.min.js"></script>
 <script>
     $("a").each(function () {
         $(this).click(function (event) {
-            checkDomain(event, "192.168.1.25");
+            checkDomain(event, "192.168.0.1");
         });
     });
 
@@ -54,26 +35,19 @@
         }
 
         var domainName = arguments[2] ? arguments[2] : arguments[1];
+
         var outerURL = getTarget(e).getAttribute("href");
 
         if (outerURL != "" && outerURL.toLowerCase().indexOf("javascript:") == -1 && outerURL.toLowerCase().indexOf(domainUrl) == -1) {
             preventDefault(e);
 
-            document.getElementById("modalDomainName").innerHTML = domainName;
-            document.getElementById("modalOuterURL").value = outerURL;
-
-            $('#myModal').modal('show');
+            var isConfirm = confirm("您访问的链接即将离开“" + domainName + "”门户网站 是否继续？")
+            if (isConfirm == true) {
+                window.open(outerURL);
+            } else {
+                return;
+            }
         }
-    }
-
-    /**
-     * 页面跳转
-     */
-    function toRedirect() {
-        $('#myModal').modal('hide');
-
-        var outerURL = document.getElementById("modalOuterURL").value;
-        window.open(outerURL);
     }
 
     /**
