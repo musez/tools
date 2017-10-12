@@ -10,6 +10,7 @@
 <h1>bootatarp 2模态框</h1>
 <!--链接-->
 <a href="http://www.baidu.com/">http://www.baidu.com/</a>
+<a href="www.baidu.com/">www.baidu.com/</a>
 
 <!-- 询问模态框 -->
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -57,13 +58,15 @@
         var domainName = arguments[2] ? arguments[2] : arguments[1];
         var outerURL = getTarget(e).getAttribute("href");
 
-        if (outerURL != "" && outerURL.toLowerCase().indexOf("javascript:") == -1 && outerURL.toLowerCase().indexOf(domainUrl) == -1) {
-            preventDefault(e);
+        if (/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/.test(outerURL)) {
+            if (outerURL != "" && outerURL.toLowerCase().indexOf("javascript:") == -1 && outerURL.toLowerCase().indexOf(domainUrl) == -1) {
+                preventDefault(e);
 
-            document.getElementById("modalDomainName").innerHTML = domainName;
-            document.getElementById("modalOuterURL").value = outerURL;
+                document.getElementById("modalDomainName").innerHTML = domainName;
+                document.getElementById("modalOuterURL").value = outerURL;
 
-            $('#myModal').modal('show');
+                $('#myModal').modal('show');
+            }
         }
     }
 

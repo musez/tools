@@ -8,6 +8,7 @@
 <h1>原生弹框</h1>
 
 <a href="http://www.baidu.com/">http://www.baidu.com/</a>
+<a href="www.baidu.com/">www.baidu.com/</a>
 
 <script src="js/jquery.min.js"></script>
 <script>
@@ -38,14 +39,16 @@
 
         var outerURL = getTarget(e).getAttribute("href");
 
-        if (outerURL != "" && outerURL.toLowerCase().indexOf("javascript:") == -1 && outerURL.toLowerCase().indexOf(domainUrl) == -1) {
-            preventDefault(e);
+        if (/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/.test(outerURL)) {
+            if (outerURL != "" && outerURL.toLowerCase().indexOf("javascript:") == -1 && outerURL.toLowerCase().indexOf(domainUrl) == -1) {
+                preventDefault(e);
 
-            var isConfirm = confirm("您访问的链接即将离开“" + domainName + "”门户网站 是否继续？")
-            if (isConfirm == true) {
-                window.open(outerURL);
-            } else {
-                return;
+                var isConfirm = confirm("您访问的链接即将离开“" + domainName + "”门户网站 是否继续？")
+                if (isConfirm == true) {
+                    window.open(outerURL);
+                } else {
+                    return;
+                }
             }
         }
     }
