@@ -18,7 +18,7 @@
 
 <!--里面有内嵌元素:如img-->
 <a href="http://www.baidu.com/">里面有内嵌元素：如img；<img src="http://www.shanghai.gov.cn/newshanghai/img/color-logo-hd.png"
-                                                 alt=""></a>
+                                                  alt=""></a>
 <br>
 <br>
 
@@ -29,7 +29,7 @@
 
 <!--dom0级进行调用-->
 dom0级进行调用
-<select onchange="if(this.selectedIndex>0){checkDomain(event,this.value,'192.168.1.25');this.selectedIndex=0;}">
+<select onchange="if(this.selectedIndex>0){checkDomain(event,this.value,'192.168.1.25','武汉佳软');this.selectedIndex=0;}">
     <option value="">--请选择--</option>
     <option value="http://www.baidu.com">http://www.baidu.com</option>
     <option value="http://www.hao123.com">http://www.hao123.com</option>
@@ -74,12 +74,12 @@ dom2级进行调用
 
     /**
      * 外链确认跳转
-     * @param e 触发事件Event对象
+     * @param event 触发事件Event对象
      * @param outerURL 外链地址
      * @param domainUrl 当前站点域名（eg:192.168.0.1）
      * @param domainName 当前站点名，默认为domainUrl值（eg:武汉佳软）
      */
-    function checkDomain(e, outerURL, domainUrl, domainName) {
+    function checkDomain(event, outerURL, domainUrl, domainName) {
         if (!arguments[0]) {
             alert("传入的参数格式有误！");
             return;
