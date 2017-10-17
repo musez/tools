@@ -5,27 +5,81 @@
     <title></title>
 </head>
 <body>
-<h1>原生弹框</h1>
+<h1>bootatarp 2模态框</h1>
+<!--完整的地址-->
+<a href="http://www.baidu.com/">完整的地址：http://www.baidu.com/</a>
+<br>
+<br>
 
-<a href="http://www.baidu.com/">http://www.baidu.com/</a>
-<a href="www.baidu.com/">www.baidu.com/</a>
-<a href="http://www.baidu.com/"><img src="http://www.shanghai.gov.cn/newshanghai/img/color-logo-hd.png" alt="">gbbgb</a>
+<!--不完整的地址-->
+<a href="www.baidu.com">不完整的地址：www.baidu.com</a>
+<br>
+<br>
+
+<!--里面有内嵌元素:如img-->
+<a href="http://www.baidu.com/">里面有内嵌元素：如img；<img src="http://www.shanghai.gov.cn/newshanghai/img/color-logo-hd.png"
+                                                 alt=""></a>
+<br>
+<br>
+
+<!--里面有内嵌元素:如span-->
+<a href="http://www.baidu.com/">里面有内嵌元素：如span；<span>http://www.baidu.com/</span></a>
+<br>
+<br>
+
+<!--dom0级进行调用-->
+dom0级进行调用
+<select onchange="if(this.selectedIndex>0){checkDomain(event,this.value,'192.168.1.25');this.selectedIndex=0;}">
+    <option value="">--请选择--</option>
+    <option value="http://www.baidu.com">http://www.baidu.com</option>
+    <option value="http://www.hao123.com">http://www.hao123.com</option>
+</select>
+<br>
+<br>
+
+<!--dom2级进行调用-->
+dom2级进行调用
+<select class="checkDomain">
+    <option value="">--请选择--</option>
+    <option value="http://www.baidu.com">http://www.baidu.com</option>
+    <option value="http://www.hao123.com">http://www.hao123.com</option>
+</select>
+<br>
+<br>
 
 <script src="js/jquery.min.js"></script>
 <script>
+    /**
+     * <a>标签进行调用
+     */
     $("a").each(function () {
         $(this).click(function (event) {
-            checkDomain(event, "192.168.0.1");
+            var outerURL = this.getAttribute("href");
+            checkDomain(event, outerURL, "192.168.0.1", "武汉佳软");
+        });
+    });
+
+    /**
+     * <select>标签进行调用
+     */
+    $(".checkDomain").each(function () {
+        $(this).change(function (event) {
+            var outerURL = this.value;
+            if (outerURL) {
+                checkDomain(event, outerURL, "192.168.0.1", "武汉佳软");
+                this.selectedIndex = 0;
+            }
         });
     });
 
     /**
      * 外链确认跳转
      * @param e 触发事件Event对象
-     * @param domainUrl 当前站点域名
-     * @param domainName 当前站点名，默认为domainUrl值
+     * @param outerURL 外链地址
+     * @param domainUrl 当前站点域名（eg:192.168.0.1）
+     * @param domainName 当前站点名，默认为domainUrl值（eg:武汉佳软）
      */
-    function checkDomain(e, domainUrl, domainName) {
+    function checkDomain(e, outerURL, domainUrl, domainName) {
         if (!arguments[0]) {
             alert("传入的参数格式有误！");
             return;
@@ -36,13 +90,21 @@
             return;
         }
 
-        var domainName = arguments[2] ? arguments[2] : arguments[1];
+        if (!arguments[2]) {
+            alert("传入的参数格式有误！");
+            return;
+        }
 
-        var outerURL = getTarget(e).getAttribute("href");
+        var domainName = arguments[3] ? arguments[3] : arguments[2];
 
         if (/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/.test(outerURL)) {
             if (outerURL != "" && outerURL.toLowerCase().indexOf("javascript:") == -1 && outerURL.toLowerCase().indexOf(domainUrl) == -1) {
-                preventDefault(e);
+                //阻止默认事件s
+                if (event.preventDefault) {
+                    event.preventDefault();
+                } else {
+                    event.returnValue = false;
+                }
 
                 var isConfirm = confirm("您访问的链接即将离开“" + domainName + "”门户网站 是否继续？")
                 if (isConfirm == true) {
@@ -51,27 +113,6 @@
                     return;
                 }
             }
-        }
-    }
-
-    /**
-     * 获取DOM对象
-     * @param event Event对象
-     * @returns DOM对象
-     */
-    function getTarget(event) {
-        return event.target || event.srcElement;
-    }
-
-    /**
-     * 阻止默认事件
-     * @param event Event对象
-     */
-    function preventDefault(event) {
-        if (event.preventDefault) {
-            event.preventDefault();
-        } else {
-            event.returnValue = false;
         }
     }
 </script>
