@@ -49,6 +49,8 @@ dom2级进行调用
 <br>
 <br>
 
+<div id="hbyw"></div>
+
 <!-- 询问模态框 -->
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
@@ -60,8 +62,8 @@ dom2级进行调用
         <input id="modalOuterURL" type="hidden">
     </div>
     <div class="modal-footer">
-        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">放弃</button>
-        <button class="btn btn-danger" onclick="toRedirect()">继续访问</button>
+        <button class="btn2 btn-default" data-dismiss="modal" aria-hidden="true">放弃</button>
+        <button class="btn2 btn-danger" onclick="toRedirect()">继续访问</button>
     </div>
 </div>
 
@@ -69,16 +71,42 @@ dom2级进行调用
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap-modal.js"></script>
 <script>
+    $.ajax({
+        url : 'http://www.hubei.gov.cn/zwgk/hbyw/hbywqb/pushinfo.jsonp',
+        dataType : "jsonp",
+        jsonp : "pushInfoJsonpCallBack",
+        timeout:10000,
+        jsonpCallback:"pushInfoJsonpCallBack",
+        success : function(data) {
+            $.each(data,function(i,json){
+                $("#hbyw").append("<li><span class='title'><a href='"+json.link+"' title='"+json.title+"' target='_blank'>"+json.title.substr(0,27)+"</a></span><span class='date'>"+json.pubDate+"</span></li>");
+
+            });
+        },
+        error:function(){
+            $("#hbyw").html("获取湖北要闻数据失败，请刷新重试");
+        }
+
+    });
+
+    /**
+     * 动态元素调用
+     */
+    $(document).on("click","a",function (event) {
+        var outerURL = this.getAttribute("href");
+        checkDomain(event, outerURL, "192.168.0.1", "武汉佳软");
+    });
+
     /**
      * <a>标签进行调用
      */
-    $("a").each(function () {
+    /*$("a").each(function () {
         $(this).click(function (event) {
             // event.preventDefault();
             var outerURL = this.getAttribute("href");
             checkDomain(event, outerURL, "192.168.0.1", "武汉佳软");
         });
-    });
+    });*/
 
     /**
      * <select>标签进行调用

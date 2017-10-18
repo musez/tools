@@ -38,7 +38,7 @@ button.close {
     -webkit-appearance: none;
 }
 
-.btn {
+.btn2 {
     display: inline-block;
     *display: inline;
     padding: 4px 12px;
@@ -75,28 +75,28 @@ button.close {
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.btn:hover,
-.btn:focus,
-.btn:active,
-.btn.active,
-.btn.disabled,
-.btn[disabled] {
+.btn2:hover,
+.btn2:focus,
+.btn2:active,
+.btn2.active,
+.btn2.disabled,
+.btn2[disabled] {
     color: #333333;
     background-color: #e6e6e6;
     *background-color: #d9d9d9;
 }
 
-.btn:active,
-.btn.active {
+.btn2:active,
+.btn2.active {
     background-color: #cccccc \9;
 }
 
-.btn:first-child {
+.btn2:first-child {
     *margin-left: 0;
 }
 
-.btn:hover,
-.btn:focus {
+.btn2:hover,
+.btn2:focus {
     color: #333333;
     text-decoration: none;
     background-position: 0 -15px;
@@ -106,14 +106,14 @@ button.close {
     transition: background-position 0.1s linear;
 }
 
-.btn:focus {
+.btn2:focus {
     outline: thin dotted #333;
     outline: 5px auto -webkit-focus-ring-color;
     outline-offset: -2px;
 }
 
-.btn.active,
-.btn:active {
+.btn2.active,
+.btn2:active {
     background-image: none;
     outline: 0;
     -webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -121,8 +121,8 @@ button.close {
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.btn.disabled,
-.btn[disabled] {
+.btn2.disabled,
+.btn2[disabled] {
     cursor: default;
     background-image: none;
     opacity: 0.65;
