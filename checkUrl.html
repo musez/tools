@@ -49,7 +49,17 @@ dom2级进行调用
 <br>
 <br>
 
+<!--动态生成dom-->
 <div id="hbyw"></div>
+
+<!--area图像映射-->
+<img src="http://www.shanghai.gov.cn/newshanghai/img/color-logo-hd.png" border="0" usemap="#planetmap" alt="Planets"/>
+
+<map name="planetmap" id="planetmap">
+    <area shape="circle" coords="180,139,14" href="http://www.baidu.com" alt="Venus"/>
+    <area shape="circle" coords="129,161,10" href="http://www.hao123.com" alt="Mercury"/>
+    <area shape="rect" coords="0,0,110,260" href="www.baidu.com" alt="Sun"/>
+</map>
 
 <!-- 询问模态框 -->
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -72,18 +82,18 @@ dom2级进行调用
 <script src="js/bootstrap-modal.js"></script>
 <script>
     $.ajax({
-        url : 'http://www.hubei.gov.cn/zwgk/hbyw/hbywqb/pushinfo.jsonp',
-        dataType : "jsonp",
-        jsonp : "pushInfoJsonpCallBack",
-        timeout:10000,
-        jsonpCallback:"pushInfoJsonpCallBack",
-        success : function(data) {
-            $.each(data,function(i,json){
-                $("#hbyw").append("<li><span class='title'><a href='"+json.link+"' title='"+json.title+"' target='_blank'>"+json.title.substr(0,27)+"</a></span><span class='date'>"+json.pubDate+"</span></li>");
+        url: 'http://www.hubei.gov.cn/zwgk/hbyw/hbywqb/pushinfo.jsonp',
+        dataType: "jsonp",
+        jsonp: "pushInfoJsonpCallBack",
+        timeout: 10000,
+        jsonpCallback: "pushInfoJsonpCallBack",
+        success: function (data) {
+            $.each(data, function (i, json) {
+                $("#hbyw").append("<li><span class='title'><a href='" + json.link + "' title='" + json.title + "' target='_blank'>" + json.title.substr(0, 27) + "</a></span><span class='date'>" + json.pubDate + "</span></li>");
 
             });
         },
-        error:function(){
+        error: function () {
             $("#hbyw").html("获取湖北要闻数据失败，请刷新重试");
         }
 
@@ -92,7 +102,7 @@ dom2级进行调用
     /**
      * 动态元素调用
      */
-    $(document).on("click","a",function (event) {
+    $("#hbyw").on("click", "a", function (event) {
         var outerURL = this.getAttribute("href");
         checkDomain(event, outerURL, "192.168.0.1", "武汉佳软");
     });
@@ -100,13 +110,30 @@ dom2级进行调用
     /**
      * <a>标签进行调用
      */
-    /*$("a").each(function () {
+    $("a").each(function () {
         $(this).click(function (event) {
-            // event.preventDefault();
             var outerURL = this.getAttribute("href");
             checkDomain(event, outerURL, "192.168.0.1", "武汉佳软");
         });
-    });*/
+    });
+
+    /**
+     * area图像映射方法一
+     */
+    $("map").on("click", "area", function (event) {
+        var outerURL = this.getAttribute("href");
+        checkDomain(event, outerURL, "192.168.0.1", "武汉佳软");
+    });
+
+    /**
+     * area图像映射方法二
+     */
+    /* $("area").each(function () {
+         $(this).click(function (event) {
+             var outerURL = this.getAttribute("href");
+             checkDomain(event, outerURL, "192.168.0.1", "武汉佳软");
+         });
+     });*/
 
     /**
      * <select>标签进行调用
