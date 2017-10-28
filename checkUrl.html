@@ -102,7 +102,7 @@ dom2级进行调用
     /**
      * 动态元素调用
      */
-    $("#hbyw").on("click", "a", function (event) {
+    $(document).on("click", "a", function (event) {
         var outerURL = this.getAttribute("href");
         checkDomain(event, outerURL, "192.168.0.1", "武汉佳软");
     });
