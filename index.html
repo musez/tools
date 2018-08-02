@@ -1,79 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>隐私声明</title>
+    <link href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css" rel="stylesheet">
+    <style>
+        ul {
+            padding-left: 20px;
+        }
+
+        .weui-article h1, .weui-article h2 {
+            font-weight: bolder;
+        }
+    </style>
 </head>
 <body>
+<h2 style="text-align: center;margin-top: 20px;">隐私声明</h2>
 
-<button onclick="showTimer(this)">click me</button>
+<article class="weui-article">
+    <p>「原气盒子」非常重视对您的个人隐私保护，有时候我们需要某些信息才能为您提供您请求的服务，本隐私声明解释了这些情况下的数据收集和使用情况。</p>
+    <p>本隐私声明适用于「原气盒子」的所有相关服务，随着「原气盒子」服务范围的扩大，隐私声明的内容可由「原气盒子」随时更新，且毋须另行通知。更新后的隐私声明一旦在网页上公布即有效代替原来的隐私声明。</p>
 
-<script>
-    function showTimer(element, time, msg) {
-        if (!arguments[1]) {
-            time = 60;
-        }
+    <h1>我们收集哪些信息</h1>
+    <p>
+        通常，您能在匿名的状态下访问「原气盒子」并获取信息。当我们需要能识别您的个人信息或者可以与您联系的信息时，我们会征求您的同意。通常，在您注册「原气盒子」或申请开通新的功能时，我们可能收集这些信息：姓名，Email地址，电话号码，并征求您的确认。</p>
 
-        if (!arguments[1]) {
-            msg = "重新发送";
-        }
+    <h1>关于您的个人信息</h1>
+    <p>「原气盒子」严格保护您个人信息的安全。我们使用各种安全技术和程序来保护您的个人信息不被未经授权的访问、使用或泄漏。</p>
+    <p>「原气盒子」会在法律要求或符合「原气盒子」的相关服务条款、软件许可使用协议约定的情况下透露您的个人信息，或者有充分理由相信必须这样做才能：</p>
+    <ul>
+        <li>满足法律或行政法规的明文规定，或者符合「原气盒子」网站适用的法律程序；</li>
+        <li>符合「原气盒子」相关服务条款、软件许可使用协议的约定；</li>
+        <li>在紧急情况下保护「原气盒子」员工、「原气盒子」产品或服务的用户或大众的个人安全。</li>
+    </ul>
+    <p>「原气盒子」不会未经您的允许将这些信息与第三方共享，本声明已经列出的上述情况除外。</p>
 
-        var countdown = time;
-        var eText = element.innerHTML;
-
-        function timer() {
-            if (countdown === 0) {
-                element.removeAttribute("disabled");
-                element.innerHTML = eText;
-                countdown = time;
-                return;
-            } else {
-                element.setAttribute("disabled", true);
-                element.innerHTML = msg + "(" + countdown + ")";
-                countdown--;
-            }
-
-            setTimeout(function () {
-                timer();
-            }, 1000)
-        }
-
-        timer();
-    }
-
-    /**
-     * @desc 是否有class
-     * @param {Object} obj
-     * @param {String} cls
-     * @returns {Boolean}
-     */
-    function hasClass(obj, cls) {
-        cls = cls.replace(/^\s|\s$/g, "")
-        return (" " + ((obj || {}).className || "").replace(/\s/g, " ") + " ").indexOf(" " + cls + " ") >= 0;
-    }
-
-    /**
-     * @desc 添加class
-     * @param {Object} obj
-     * @param {String} cls
-     */
-    function addClass(obj, cls) {
-        if (!this.hasClass(obj, cls)) obj.className += " " + cls;
-    }
-
-    /**
-     * @desc 删除class
-     * @param {Object} obj
-     * @param {String} cls
-     */
-    function removeClass(obj, cls) {
-        cls = cls.replace(/^\s|\s$/g, "");
-
-        if ((" " + ((obj || {}).className || "").replace(/\s/g, " ") + " ").indexOf(" " + cls + " ") >= 0) {
-            var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
-            obj.className = obj.className.replace(reg, ' ');
-        }
-    }
-</script>
+    <h1>关于免责说明</h1>
+    <p>就下列相关事宜的发生，「原气盒子」不承担任何法律责任：</p>
+    <ul>
+        <li>由于您将用户密码告知他人或与他人共享注册帐户，由此导致的任何个人信息的泄漏，或其他非因「原气盒子」原因导致的个人信息的泄漏；</li>
+        <li>「原气盒子」根据法律规定或政府相关政策要求提供您的个人信息；</li>
+        <li>任何第三方根据「原气盒子」各服务条款及声明中所列明的情况使用您的个人信息，由此所产生的纠纷；</li>
+        <li>任何由于黑客攻击、电脑病毒侵入或政府管制而造成的暂时性网站关闭；</li>
+        <li>因不可抗力导致的任何后果；</li>
+        <li>「原气盒子」在各服务条款及声明中列明的使用方式或免责情形。</li>
+    </ul>
+</article>
 </body>
 </html>

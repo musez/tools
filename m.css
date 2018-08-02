@@ -1,0 +1,14 @@
+.dad {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm0uc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHFCQUFjO0VBQWQscUJBQWM7RUFBZCxjQUFjO0VBQ2QseUJBQUE7TUFBQSxzQkFBQTtVQUFBLHdCQUFBO0VBR0EsMEJBQW9CO01BQXBCLHVCQUFvQjtVQUFwQixvQkFBb0I7RUFDcEI7O0dBRUM7Q0FDRiIsImZpbGUiOiJtLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuZGFkIHtcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIC5zb24ge1xyXG5cclxuICB9XHJcbn1cclxuIl19 */
+
+/*# sourceMappingURL=m.css.map */
