@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input onClick="WdatePicker()" type="text">
+
+<input id="WdatePicker1" type="text"/>
+<img onclick="WdatePicker({el:'WdatePicker1'})" src="js/My97DatePicker/skin/datePicker.gif" width="16" height="22"
+     align="absmiddle">
+
+<input id="WdatePicker2" onClick="WdatePicker({isShowWeek:true})" type="text"/>
+
+<button onClick="toGet()">获取</button>
+
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/My97DatePicker/WdatePicker.js"></script>
+<script>
+    $(function () {
+
+    })
+
+    function toGet() {
+        console.log(111);
+        console.log( $("#WdatePicker2").val());
+        $("#WdatePicker2").val()
+    }
+</script>
+</body>
+</html>
