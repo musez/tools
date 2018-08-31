@@ -39,7 +39,12 @@ dom0级进行调用
 <br>
 <br>
 
-<iframe id="checkDomianParentID" src="checkUrl41.html" frameborder="0" width="100%" height="400px"></iframe>
+<iframe id="checkDomianParentID" name="checkDomianParentName" src="checkUrl51.html" frameborder="0" width="100%"
+        height="400px"></iframe>
+
+<iframe id="fw20180831" name="fw20180831" src="http://www.egs.gov.cn/info/iList.jsp?tm_id=2855" frameborder="0"
+        width="100%"
+        height="400px"></iframe>
 
 <!-- 询问模态框 -->
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -61,7 +66,33 @@ dom0级进行调用
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap-modal.js"></script>
 <script>
+    $(function () {
+        var iframeFw20180831 = window.frames['fw20180831'];
+        //iframe加载完成后你需要进行的操作
+        if (iframeFw20180831.attachEvent) {
+            iframeFw20180831.attachEvent("onload", function () {
+                _dealIframe(iframeFw20180831);
+            });
+        } else {
+            iframeFw20180831.onload = function () {
+                _dealIframe(iframeFw20180831);
+            };
+        }
 
+        function _dealIframe(iframeName) {
+            var iframeEel = iframeName.document;
+            $(iframeEel).on("click", "a", function (event) {
+                var outerURL = this.getAttribute("href");
+                if (outerURL) {
+                    checkDomain(event, outerURL, {
+                        domainUrl: ["gsj.huangshi.gov.cn", "hs.egs.gov.cn", "www.egs.gov.cn"],
+                        domainName: "黄石市工商行政管理局",
+                        domainType: 0
+                    });
+                }
+            });
+        }
+    })
 
     /**
      * 外链确认跳转
