@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <!--引用css-->
+    <link rel="stylesheet" href="css/bootstrap2.css">
+</head>
+<body>
+<h1>父子窗口的调用</h1>
+<br>
+<br>
+<h2>这里是父窗口</h2>
+<a href="http://www.baidu.com/"
+   onclick="checkDomain(event,this.href,{domainUrl:['192.168.1.25'],domainName:'武汉佳软'})">一个域名：http://www.baidu.com/</a>
+<br>
+<br>
+<a href="http://www.baidu.com/"
+   onclick="checkDomain(event,this.href,{domainUrl:['192.168.1.25','192.168.1.163'],domainName:'武汉佳软'})">多域名外链：http://www.baidu.com/</a>
+<br>
+<br>
+<a href="http://192.168.1.25/"
+   onclick="checkDomain(event,this.href,{domainUrl:['192.168.1.25','192.168.1.163'],domainName:'武汉佳软'})">多域名内部链接：http://192.168.1.25/</a>
+<br>
+<br>
+<a href="http://192.168.1.25/" target="_blank"
+   onclick="checkDomain(event,this.href,{domainUrl:['192.168.1.25','192.168.1.163'],domainName:'武汉佳软'})">多域名内部链接打开新窗口：http://192.168.1.25/</a>
+<br>
+<br>
+<!--dom0级进行调用-->
+dom0级进行调用
+<select onchange="if(this.selectedIndex>0){checkDomain(event,this.value,{domainUrl:['192.168.1.25','192.168.1.163'],domainName: '武汉佳软',domainType:1});this.selectedIndex=0;}">
+    <option value="">--请选择--</option>
+    <option value="http://www.baidu.com">http://www.baidu.com</option>
+    <option value="http://www.hao123.com">http://www.hao123.com</option>
+    <option value="http://192.168.1.25">192.168.1.25</option>
+    <option value="http://192.168.1.163">192.168.1.163</option>
+</select>
+<br>
+<br>
+
+<iframe id="checkDomianParentID" src="checkUrl41.html" frameborder="0" width="100%" height="400px"></iframe>
+
+<!-- 询问模态框 -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="bootstrap-close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">&nbsp;</h3>
+    </div>
+    <div class="modal-body">
+        <p>您访问的链接即将离开“<span id="modalDomainName"></span>”门户网站 是否继续？</p>
+        <input id="modalOuterURL" type="hidden">
+    </div>
+    <div class="modal-footer">
+        <button class="bootstrap-btn bootstrap-btn-default" data-dismiss="modal" aria-hidden="true">放弃</button>
+        <button class="bootstrap-btn bootstrap-btn-danger" onclick="toRedirect()">继续访问</button>
+    </div>
+</div>
+
+<!--引用js-->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap-modal.js"></script>
+<script>
+
+
+    /**
+     * 外链确认跳转
+     * @param event 触发事件Event对象
+     * @param outerURL 外链地址
+     * @param {Array} settings.domainUrl 当前站点域名（eg:['192.168.0.1']）
+     * @param {String} settings.domainName 当前站点名，默认为domainUrl值（eg:武汉佳软）
+     * @param {Number} domainType 调用的dom元素类型，a或select，0代表元素类型为a，1代表元素类型为select 默认值为0（note:a与map的子标签area类型都为a）
+     *
+     * eg:checkDomain(event,this.href,{domainUrl:['192.168.1.25','192.168.1.26'],domainName:'武汉佳软'})
+     * eg:checkDomain(event,this.href,{domainUrl:['192.168.1.25','192.168.1.26'],domainName:'武汉佳软',domainType:0});
+     * eg:checkDomain(event,this.href,{domainUrl:['192.168.1.25','192.168.1.26'],domainName:'武汉佳软',domainType:1});
+     */
+    function checkDomain(event, outerURL, settings) {
+        if (!arguments[0]) {
+            alert("传入的参数格式有误！");
+            return;
+        }
+
+        if (!arguments[1]) {
+            // alert("传入的参数格式有误！");
+            return;
+        }
+
+        var defaultSetting = {
+            domainUrl: [window.location.host],
+            domainName: window.location.host,
+            domainType: 0
+        }
+
+        var extendSetting = $.extend(defaultSetting, settings);
+
+        if (/http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/.test(outerURL)) {
+
+            if (outerURL != "" && outerURL.toLowerCase().indexOf("javascript:") == -1) {
+                var domainUrlFlag = false;
+                for (var item in extendSetting.domainUrl) {
+                    if (outerURL.toLowerCase().indexOf(extendSetting.domainUrl[item]) == -1) {
+                        domainUrlFlag = false;
+                    } else {
+                        domainUrlFlag = true;
+                        break;
+                    }
+                }
+
+                if (!domainUrlFlag) {
+                    //阻止默认事件
+                    if (event.preventDefault) {
+                        event.preventDefault();
+                    } else {
+                        event.returnValue = false;
+                    }
+
+                    document.getElementById("modalDomainName").innerHTML = extendSetting.domainName;
+                    document.getElementById("modalOuterURL").value = outerURL;
+
+                    $('#myModal').modal('show');
+                } else {
+                    if (1 === parseInt(extendSetting.domainType)) {
+                        window.open(outerURL);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * 页面跳转
+     */
+    function toRedirect() {
+        $('#myModal').modal('hide');
+
+        var outerURL = document.getElementById("modalOuterURL").value;
+        window.open(outerURL);
+    }
+</script>
+</body>
+</html>
