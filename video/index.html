@@ -1,0 +1,48 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://vjs.zencdn.net/6.6.3/video-js.css" rel="stylesheet">
+
+    <!-- If you'd like to support IE8 -->
+    <script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+</head>
+
+<body>
+<embed src="http://zjj.hubei.gov.cn/wcm.files/upload/CMShbzljd/201711/201711300515005.mp4" type="video/x-ms-asf-plugin"
+       width="550" height="400" autostart="false" loop="true">
+
+<embed src="http://zjj.hubei.gov.cn/wcm.files/upload/CMShbzljd/201711/201711300515005.mp4" type="video/x-ms-asf-plugin"
+                                                                     width="550" height="400" autostart="false" loop="true">
+
+<!--<video id="my-video" class="video-js" controls preload="auto" width="300" height="150" style="margin: 0 auto;"
+       poster="MY_VIDEO_POSTER.jpg" data-setup="{}">
+    <source src="http://zjj.hubei.gov.cn/wcm.files/upload/CMShbzljd/201711/201711300515005.mp4" type='video/mp4'>
+    <p class="vjs-no-js">
+        To view this video please enable JavaScript, and consider upgrading to a web browser that
+        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+    </p>
+</video>-->
+
+<script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://vjs.zencdn.net/6.6.3/video.js"></script>
+<script>
+
+
+    $("embed").each(function () {
+        console.log($(this));
+        var videoSrc = $(this).attr("src");
+
+        var videoNode = "";
+        videoNode += "<video class=\"video-js\" controls preload=\"auto\" width=\"300\" height=\"150\" style=\"margin: 0 auto;\" poster=\"MY_VIDEO_POSTER.jpg\" data-setup=\"{}\">";
+        videoNode += "    <source src=\"" + videoSrc + "\" type='video/mp4'>";
+        videoNode += "    <p class=\"vjs-no-js\">";
+        videoNode += "        To view this video please enable JavaScript, and consider upgrading to a web browser that";
+        videoNode += "    </p>";
+        videoNode += "</video>";
+
+        $(this).replaceWith(videoNode)
+    });
+    // var $oldVideo = $("embed");
+
+
+</script>
+</body>

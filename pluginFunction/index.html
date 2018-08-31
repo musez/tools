@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="Validform/css/style.css">
+</head>
+
+<body>
+<form class="demoform">
+    <table>
+        <tr>
+            <td>字母、数字、下划线</td>
+            <td>
+                <input type="text" name="name" datatype="en_num_underline" sucmsg="验证通过！" nullmsg="请输入字母、数字、下划线！" errormsg="字母、数字、下划线！"/>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>6-16位字母、数字、下划线</td>
+            <td>
+                <input type="text" name="name" datatype="en_num_underline6-16" sucmsg="验证通过！" nullmsg="请输入6~16字母、数字、下划线！" errormsg="6~16字母、数字、下划线！"/>
+            </td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>中文</td>
+            <td>
+                <input type="text" name="name" datatype="zh" sucmsg="验证通过！" nullmsg="中文！" errormsg="请填写中文！"/>
+            </td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>6~16位数字</td>
+            <td>
+                <input type="text" name="name" datatype="n6-10" sucmsg="验证通过！" />
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>日期</td>
+            <td>
+                <!--昵称-->
+                <input type="text" name="name" datatype="date" errormsg="请填写日期！"/>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>昵称</td>
+            <td>
+                <!--昵称-->
+                <input type="text" name="name" datatype="s5-16" errormsg="昵称至少5个字符,最多16个字符！"/>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>用户名</td>
+            <td>
+                <!--ajax实时验证用户名-->
+                <input type="text" name="name" datatype="e" ajaxurl="valid.php?myparam1=value1&myparam2=value2"
+                       sucmsg="用户名验证通过！" nullmsg="请输入用户名！" errormsg="请用邮箱或手机号码注册！"/>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>密码</td>
+            <td>
+                <!--密码-->
+                <input type="password" name="userpassword" datatype="*6-15" errormsg="密码范围在6~15位之间！"/>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>确认密码</td>
+            <td>
+                <!--确认密码-->
+                <input type="password" name="userpassword2" datatype="*" recheck="userpassword"
+                       errormsg="您两次输入的账号密码不一致！"/>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>默认提示文字</td>
+            <td>
+                <!--默认提示文字-->
+                <textarea tip="请在这里输入您的意见。" errormsg="很感谢您花费宝贵时间给我们提供反馈，请填写有效内容！" datatype="s" altercss="gray"
+                          class="gray"
+                          name="msg">请在这里输入您的意见。</textarea>
+            </td>
+            <td></td>
+        </tr>
+       <!-- <tr>
+            <td>使用swfupload插件</td>
+            <td>
+                &lt;!&ndash;使用swfupload插件&ndash;&gt;
+                <input type="text" plugin="swfupload" class="inputxt" disabled="disabled">
+                <input type="hidden" pluginhidden="swfupload">
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>使用passwordStrength插件</td>
+            <td>
+                &lt;!&ndash;使用passwordStrength插件&ndash;&gt;
+                <input type="password" errormsg="密码至少6个字符,最多18个字符！" datatype="*6-18" plugin="passwordStrength"
+                       class="inputxt"
+                       name="password">
+                <div class="passwordStrength" style="display:none;"><b>密码强度：</b> <span>弱</span><span>中</span><span
+                        class="last">强</span></div>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>使用DatePicker插件</td>
+            <td>
+                &lt;!&ndash;使用DatePicker插件&ndash;&gt;
+                <input type="text" plugin="datepicker" class="inputxt" name="birthday">
+            </td>
+            <td></td>
+        </tr>-->
+        <tr>
+            <td colspan="3">
+                <button id="btn_sub">提交按钮</button>
+                <button class="btn_reset">reset</button>
+            </td>
+        </tr>
+    </table>
+</form>
+
+<script src="jquery/jquery.js"></script>
+<script src="Validform/js/Validform_v5.3.2.js"></script>
+<script src="Validform/js/Validform_Datatype.js"></script>
+<script src="Validform/js/JR_Validform.js"></script>
+<script>
+    var Validform = new Validform(".demoform", {
+        btnSubmit: "#btn_sub", //指定当前表单下的哪一个按钮触发表单提交事件，如果表单下有submit按钮时可以省略该参数。示例中".btn_sub"是该表单下要绑定点击提交表单事件的按钮；
+        btnReset: ".btn_reset",//是该表单下要绑定点击重置表单事件的按钮;
+        tiptype: 2, //可用的值有：1、2、3、4和function函数，默认tiptype为1。 3、4是5.2.1版本新增
+                    //1=> 自定义弹出框提示；
+                    //2=> 侧边提示(会在当前元素的父级的next对象的子级查找显示提示信息的对象，表单以ajax提交时会弹出自定义提示框显示表单提交状态)；
+                    //3=> 侧边提示(会在当前元素的siblings对象中查找显示提示信息的对象，表单以ajax提交时会弹出自定义提示框显示表单提交状态)；
+                    //4=> 侧边提示(会在当前元素的父级的next对象下查找显示提示信息的对象，表单以ajax提交时不显示表单的提交状态)；
+                    //如果上面的4种提示方式不是你需要的，你可以给tiptype传入自定义函数。通过自定义函数，可以实现你想要的任何提示效果：
+
+        ignoreHidden: false,//可用值： true | false。
+        //默认为false，当为true时对:hidden的表单元素将不做验证;
+        dragonfly: false, //可用值： true | false。
+        //默认false，当为true时，值为空时不做验证；
+        tipSweep: true, //可用值： true | false。
+        //默认为false， 5.3版中做了修正，在各种tiptype下， 为true时提示信息将只会在表单提交时触发显示，各表单元素blur时不会触发信息提示；
+        label: ".label", // 选择符
+        //在没有绑定nullmsg时查找要显示的提示文字，默认查找".Validform_label"下的文字；
+        showAllError: true,
+        /*
+         可用值： true | false。
+         默认为false，true：提交表单时所有错误提示信息都会显示；false：一碰到验证不通过的对象就会停止检测后面的元素，只显示该元素的错误信息；
+         * */
+        postonce: true,
+        /**
+         * 可用值： true | false。
+         默认为false，指定是否开启二次提交防御，true开启，不指定则默认关闭；
+         为true时，在数据成功提交后，表单将不能再继续提交。
+         */
+        ajaxPost: true,
+        /**
+         * 可用值： true | false。
+         默认为false，使用ajax方式提交表单数据，将会把数据POST到config方法或表单action属性里设定的地址；
+         */
+        datatype: {
+            /**
+             * 传入自定义datatype类型，可以是正则，也可以是函数。
+             datatyp:{
+            "zh2-4":/^[\u4E00-\u9FA5\uf900-\ufa2d]{2,4}$/,
+            "phone":function(gets,obj,curform,regxp){
+                //参数gets是获取到的表单元素值，
+                //obj为当前表单元素，
+                //curform为当前验证的表单，
+                //regxp为内置的一些正则表达式的引用。
+
+                //return false表示验证出错，没有return或者return true表示验证通过。
+                }
+            }
+             */
+            datatyp:{
+                "zh2-4":/^[\u4E00-\u9FA5\uf900-\ufa2d]{2,4}$/,
+                "phone":function(gets,obj,curform,regxp){
+                    //参数gets是获取到的表单元素值，
+                    //obj为当前表单元素，
+                    //curform为当前验证的表单，
+                    //regxp为内置的一些正则表达式的引用。
+
+                    //return false表示验证出错，没有return或者return true表示验证通过。
+                }
+            },
+            "*6-20": /^[^\s]{6,20}$/,
+            "z2-4": /^[\u4E00-\u9FA5\uf900-\ufa2d]{2,4}$/,
+            "username": function (gets, obj, curform, regxp) {
+                //参数gets是获取到的表单元素值，obj为当前表单元素，curform为当前验证的表单，regxp为内置的一些正则表达式的引用;
+                var reg1 = /^[\w\.]{4,16}$/,
+                    reg2 = /^[\u4E00-\u9FA5\uf900-\ufa2d]{2,8}$/;
+                if (reg1.test(gets)) {
+                    return true;
+                }
+                if (reg2.test(gets)) {
+                    return true;
+                }
+                return false;
+                //注意return可以返回true 或 false 或 字符串文字，true表示验证通过，返回字符串表示验证失败，字符串作为错误提示显示，返回false则用errmsg或默认的错误提示;
+            },
+            "phone": function () {
+                // 5.0 版本之后，要实现二选一的验证效果，datatype 的名称 不 需要以 "option_" 开头;
+            }
+        },
+        usePlugin: {
+            /**
+             * 目前已整合swfupload、datepicker、passwordstrength和jqtransform四个插件，在这里传入这些插件使用时需要传入的参数。datepicker在Validform内调用时另外扩展了几个比较实用的参数，具体请参考demo页；
+             */
+            swfupload: {},
+            datepicker: {},
+            passwordstrength: {},
+            jqtransform: {
+                selector: "select,input"
+            }
+        },
+        beforeCheck: function (curform) {
+            //在表单提交执行验证之前执行的函数，curform参数是当前表单对象。
+            //这里明确return false的话将不会继续执行验证操作;
+        },
+        beforeSubmit: function (curform) {
+            //在验证成功后，表单提交前执行的函数，curform参数是当前表单对象。
+            //这里明确return false的话表单将不会提交;
+        },
+        callback: function (data) {
+            //返回数据data是json对象，{"info":"demo info","status":"y"}
+            //info: 输出提示信息;
+            //status: 返回提交数据的状态,是否提交成功。如可以用"y"表示提交成功，"n"表示提交失败，在ajax_post.php文件返回数据里自定字符，主要用在callback函数里根据该值执行相应的回调操作;
+            //你也可以在ajax_post.php文件返回更多信息在这里获取，进行相应操作；
+            //ajax遇到服务端错误时也会执行回调，这时的data是{ status:**, statusText:**, readyState:**, responseText:** }；
+
+            //这里执行回调操作;
+            //注意：如果不是ajax方式提交表单，传入callback，这时data参数是当前表单对象，回调函数会在表单验证全部通过后执行，然后判断是否提交表单，如果callback里明确return false，则表单不会提交，如果return true或没有return，则会提交表单。
+        }
+    });
+    console.log(Validform.dataType)
+
+</script>
+</body>
+</html>

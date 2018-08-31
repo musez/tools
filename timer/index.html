@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        /* cny */
+        html {
+            overflow-x: hidden;
+        }
+
+        .cny {
+            display: none;
+            width: 1022px;
+            background-color: #000;
+            *background-color: #eee;
+            _background-color: #eee;
+            background-color: #eee \0;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.1);
+            filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#20000000, endcolorstr=#20000000);
+            left: 50%;
+            margin-left: -511px;
+            z-index: 999999;
+        }
+
+        .cny .cont {
+            border: 1px #d00 solid;
+            background-color: #f39c12;
+            position: relative;
+            padding: 9px;
+        }
+
+        .cny .cont .close {
+            background-image: url(http://www.hbly.gov.cn/images/new/close3.png);
+            background-repeat: no-repeat;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            cursor: pointer;
+            height: 20px;
+            width: 20px;
+        }
+    </style>
+
+</head>
+<body>
+<script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://www.stats-hb.gov.cn/js/jquery.tools.overlay.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //页面加载完成后弹广告
+        $('body').append('<div class="cny"><div class="cont"><a class="close"></a><embed src="http://www.egs.gov.cn/wcm.files/upload/CMSegs/201602/201602020618011.swf"  wmode="transparent" type="application/x-shockwave-flash" width="1002" height="660" quality="high"/></div></div>');
+        console.log(   $(".cny"));
+
+        $(".cny").overlay({
+            closeOnClick: false,
+            speed: 'fast',
+            top: '5%',
+            mask: {
+                color: '#000',
+                closeSpeed: 200,
+                opacity: 0.1
+            },
+            load: true
+        });
+        //5秒后自动关闭
+        $(function () {
+            setTimeout("$('.cny').overlay().close();$('.cny').remove();", 78000)
+        });
+        $(".cny .close").click(function () {
+            $(".cny").remove()
+        })
+    });
+</script>
+<!--春节弹层结束-->
+
+</body>
+</html>

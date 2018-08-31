@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="article-box">
+    <a href="index.html">index.html</a><br>
+    <a href="http://nyt.hubei.gov.cn/">http://nyt.hubei.gov.cn/</a><br>
+    <a href="http://nyt.hubei.gov.cn:82/">http://nyt.hubei.gov.cn:82/</a><br>
+    <a href="http://192.168.1.131/tools/index.html">http://192.108.1.131/tools/index.html</a><br>
+    <a href="http://www.hao123.com">http://www.hao123.xom</a><br>
+    <a href="http://www.baidu.com">http://www.baidu.com</a><br>
+    <a href="http://www.ppseas.com">http://www.ppseas.com</a>
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script>
+    $(function () {
+        checkDomainRemove('.article-box', ['nyt.hubei.gov.cn', 'nyt.hubei.gov.cn:82'])
+    });
+
+    /*
+     * 清空外部链接，当前域名可以不用配置
+     * @param {string} element - 包含外链的dom元素
+     * @param {Array} [domainUrls = []] - 配置的内部链接。可以省略，默认值为[]
+     * eg：checkDomainRemove(".article-box",['nyt.hubei.gov.cn','nyt.hubei.gov.cn:82'])
+     */
+    function checkDomainRemove(element, domainUrls) {
+        if (!arguments[0]) {
+            alert('传入的参数格式有误！');
+            return;
+        }
+
+        if (!arguments[1]) {
+            domainUrls = []
+        }
+
+        $(element).find("a").each(function () {
+            var linkUrl = $(this).attr("href");
+
+            var urlRegex = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+            // 先判断是否是完整的域名？如果不是完整的域名，则表明不是外部链接；如果是完整的域名，再判断是否是外部链接。
+            if (urlRegex.test(linkUrl)) {
+                var curDomainUrl = window.location.host.toLowerCase();
+                // 判断当前的url地址是否包含有当前的域名？如果有，这是内部链接；没有，判断配置的域名。
+                if (linkUrl.toLowerCase().indexOf(curDomainUrl) > -1) {
+                    console.log("curDomainUrl");
+                    return;
+                }
+
+                var domainUrlFlag = false;
+                for (var i = 0, len = domainUrls.length; i < len; i++) {
+                    var domainUrl = domainUrls[i];
+                    // 判断当前的url地址是否包含有配置的域名？如果有，这是内部链接；没有，则为外部链接。
+                    if (linkUrl.toLowerCase().indexOf(domainUrl) > -1) {
+                        domainUrlFlag = true;
+                        break;
+                    }
+                }
+
+                // 外部链接，删除url地址
+                if (!domainUrlFlag) {
+                    $(this).attr("href", "javascript:;");
+                }
+            } else {
+                return;
+            }
+        });
+    }
+</script>
+</body>
+</html>
