@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <title></title>
     <!--引用css-->
+    <!--<link rel="stylesheet" href="css/bootstrap2.css">-->
 </head>
 <body>
 <h2>这里是子窗口</h2>
 <a href="http://www.baidu.com/" target="_blank">一个域名：http://www.baidu.com/</a>
 <br>
 <br>
-<a href="http://www.baidu.com/" >多域名外链：http://www.baidu.com/</a>
+<a href="http://www.baidu.com/">多域名外链：http://www.baidu.com/</a>
 <br>
 <br>
 <a href="http://192.168.1.25/">多域名内部链接：http://192.168.1.25/</a>
@@ -22,8 +23,23 @@
 
 <!--引用js-->
 <script src="js/jquery.min.js"></script>
-<script>
+<!--<script src="js/bootstrap-modal.js"></script>-->
 
+<script>
+    // $(document).on("click", "a", function (event) {
+    //     var outerURL = $(this).attr("href");
+    //     if (outerURL) {
+    //         var params = {
+    //             ele: $(this),
+    //             outerURL: {
+    //                 domainUrl: ["192.168.0.1"],
+    //                 domainName: "武汉佳软"
+    //             }
+    //         }
+    //
+    //         window.parent.postMessage(JSON.stringify(params), 'http://localhost/');
+    //     }
+    // });
 </script>
 </body>
 </html>
