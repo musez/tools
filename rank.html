@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title>信息发布月度排行</title>
+    <style>
+        /* reset css */
+        body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, fieldset, legend, input, button, textarea, p, th, td {
+            margin: 0;
+            padding: 0;
+        }
+
+        fieldset, img {
+            border: 0;
+        }
+
+        address, cite, dfn, em, var {
+            font-style: normal;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-size: 100%;
+        }
+
+        ol, ul {
+            list-style: none;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        caption, th {
+            text-align: left;
+            font-weight: normal;
+        }
+
+        /* 清除浮动 */
+        .clearfix:after, .nav:after, .content:after, .grid:after, .h:after {
+            content: '\20';
+            display: block;
+            height: 0;
+            clear: both;
+        }
+
+        .clearfix, .nav, .content, .grid, .h {
+            *zoom: 1;
+        }
+
+        .clear {
+            clear: both;
+            height: 0;
+            font: 0/0 Arial;
+            visibility: hidden;
+        }
+
+        /* 通用 */
+        body, button, input, select, textarea {
+            font: 12px/1.5 Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+            color: #333;
+        }
+
+        .vm, input, label {
+            vertical-align: middle;
+        }
+
+        .tc {
+            text-align: center;
+        }
+
+        .fl {
+            float: left;
+            _display: inline;
+        }
+
+        .fr {
+            float: right;
+            _display: inline;
+        }
+
+        .mb10 {
+            margin-bottom: 10px;
+        }
+
+        .mr10 {
+            margin-right: 10px;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .nt {
+            text-align: left;
+            letter-spacing: -3em;
+            overflow: hidden;
+        }
+
+        .nt:first-letter {
+            margin-left: -20em;
+        }
+
+        /* 链接 */
+        a {
+            color: #252525;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #048;
+        }
+
+        a:active {
+            outline: none;
+        }
+
+        /* nav */
+        .nav li, .nav dt, .nav dd {
+            float: left;
+            position: relative;
+        }
+
+        .nav a {
+            display: inline-block;
+        }
+
+        .nav dt {
+            font-weight: bold;
+        }
+
+        /* tab */
+        .tab {
+            display: block;
+        }
+
+        .tab li {
+            float: left;
+        }
+
+        .tab a {
+            display: inline-block;
+        }
+
+        /* list */
+        .h li {
+            float: left;
+            _display: inline;
+            _white-space: nowrap;
+        }
+
+        .list-t, .list-a, .list-p, .list-b-t, .list-p-t, .list-p-t li, .list-r {
+            overflow: hidden;
+            zoom: 1;
+        }
+
+        .list-t li, .list-a li, .list-p li, .list-b-t li, .list-p-t li, .list-r li {
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .list-t li a {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .list-t li a:hover {
+            text-decoration: underline;
+        }
+
+        .list-t li span.tag {
+            margin-right: 5px;
+        }
+
+        .list-t li span.date {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .list-p li {
+            text-align: center;
+        }
+
+        .list-a li a {
+            display: inline-block;
+        }
+
+        /*月度排行*/
+        .grid {
+            width: 1190px;
+        }
+
+        .p5 {
+            /*margin-top: 10px;*/
+            /*margin-bottom: 20px;*/
+        }
+
+        .box {
+            width: 590px;
+            border: 1px #ccc solid;
+            border-top: 2px #3284bb solid;
+        }
+
+        .tit {
+            height: 40px;
+            color: #3284bb;
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 40px;
+            border-bottom: 1px #ccc solid;
+            padding: 10px;
+        }
+
+        .tit i {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            vertical-align: middle;
+            background: url("img/css_sprites.png") 110px 54px no-repeat;
+            overflow: hidden;
+        }
+
+        i.icon1 {
+            background-position: -65px -10px;
+        }
+
+        i.icon2 {
+            background-position: -10px -10px;
+        }
+
+        .info-list {
+            height: 105px;
+            padding: 10px;
+        }
+
+        .info-list ul {
+            padding: 0;
+            margin: 0;
+        }
+
+        .info-list li {
+            display: block;
+            width: 33.33%;
+            float: left;
+        }
+
+        .info-list li a {
+            display: block;
+            height: 20px;
+            line-height: 20px;
+            color: #333;
+            font-size: 14px;
+            text-decoration: none;
+
+            padding: 8px;
+
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .info-list li .order {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+
+            color: #3383be;
+            line-height: 20px;
+            text-align: center;
+            margin-right: 8px;
+
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+        }
+
+        .info-list li.first .order {
+            color: #fff;
+            background-color: #ed2424;
+        }
+
+        .info-list li.first .num {
+            color: #ed2424;
+        }
+
+        .info-list li.second .order {
+            color: #fff;
+            background-color: #fa6320;
+        }
+
+        .info-list li.second .num {
+            color: #fa6320;
+        }
+
+        .info-list li.third .order {
+            color: #fff;
+            background-color: #ffc032;
+        }
+
+        .info-list li.third .num {
+            color: #ffc032;
+        }
+
+        /*滚动条样式*/
+        .nicescroll-rails {
+            border-left: 1px #ccc solid;
+        }
+    </style>
+</head>
+<body>
+<div class="grid p5">
+    <div class="box fl">
+        <h3 class="tit"><i class="icon1"></i>&nbsp;厅机关各处室信息发布月度排行 [<span id="jsRankMonth1"></span>]</h3>
+
+        <div class="info-list">
+            <ul id="jsRankList1">
+            </ul>
+        </div>
+    </div>
+
+    <div class="box fr">
+        <h3 class="tit"><i class="icon2"></i>&nbsp;下属单位信息发布月度排行 [<span id="jsRankMonth2"></span>]</h3>
+
+        <div class="info-list">
+            <ul id="jsRankList2">
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.nicescroll/jquery.nicescroll.min.js"></script>
+<script>
+    $(function () {
+        getRankList1();
+        getRankList2();
+
+        $(".info-list").niceScroll({
+            cursorcolor: "#b4b4b4",//滚动条颜色
+            cursorwidth: "6px", // 滚动条的宽度，单位：便素
+            cursorborderradius: "3px", // 滚动条圆角（像素）
+            railpadding: {top: 0, right: 1, left: 0, bottom: 0},
+            autohidemode: false
+        });
+    });
+
+    function getRankList1() {
+        var params = {
+            catId: "10,11,12,13,14,15,16,17,18,93,4,5,98,6,7,8,9"
+        }
+
+        jQuery.support.cors = true;
+        $.ajax({
+            url: "http://192.168.1.54:8080/developer/wcm/findDeptInputNumber",
+            type: "POST",
+            data: $.param(params),
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            success: function (response) {
+                var codeTemp = parseInt(response.code);
+                var dataTemp = response.data;
+
+                if (codeTemp === 0) {
+                    $("#jsRankMonth1").text(dataTemp.month);
+
+                    for (var i = 0, len = dataTemp.list.length; i < len; i++) {
+                        var order = i + 1;
+                        var item = dataTemp.list[i];
+
+                        var liNode = '<li><a href="javascript:;"><span class="order">' + order + '</span>' + item[1] + '<span class="num">(' + item[0] + ')</span></a></li>'
+                        $("#jsRankList1").append(liNode);
+                    }
+
+                    $("#jsRankList1 li").eq(0).addClass("first");
+                    $("#jsRankList1 li").eq(1).addClass("second");
+                    $("#jsRankList1 li").eq(2).addClass("third");
+                } else {
+                    alert(dataTemp.msg);
+                }
+            },
+            error: function (error) {
+                alert("网络连接错误，请刷新或稍后重试！")
+            }
+        })
+    }
+
+    function getRankList2() {
+        var params = {
+            catId: "29.30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47"
+        }
+
+        jQuery.support.cors = true;
+        $.ajax({
+            url: "http://192.168.1.54:8080/developer/wcm/findDeptInputNumber",
+            type: "POST",
+            data: $.param(params),
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            success: function (response) {
+                var codeTemp = parseInt(response.code);
+                var dataTemp = response.data;
+
+                if (codeTemp === 0) {
+                    $("#jsRankMonth2").text(dataTemp.month);
+
+                    for (var i = 0, len = dataTemp.list.length; i < len; i++) {
+                        var order = i + 1;
+                        var item = dataTemp.list[i];
+
+                        var liNode = '<li><a href="javascript:;"><span class="order">' + order + '</span>' + item[1] + '<span class="num">(' + item[0] + ')</span></a></li>'
+                        $("#jsRankList2").append(liNode);
+                    }
+
+                    $("#jsRankList2 li").eq(0).addClass("first");
+                    $("#jsRankList2 li").eq(1).addClass("second");
+                    $("#jsRankList2 li").eq(2).addClass("third");
+                } else {
+                    alert(dataTemp.msg);
+                }
+            },
+            error: function (error) {
+                alert("网络连接错误，请刷新或稍后重试！")
+            }
+        })
+    }
+</script>
+</body>
+</html>

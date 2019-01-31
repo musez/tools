@@ -1,0 +1,15 @@
+doctype html
+html
+    head
+        title
+        meta(charset="usf-8")
+    body
+        div#title
+        script(src="https://cdn.bootcss.com/seajs/3.0.3/sea.js")
+        script(type="text/javascript").
+            seajs.config({
+                alias: {
+                    'jquery': 'https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js'
+                }
+            });
+            seajs.use('./index.js');
